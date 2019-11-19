@@ -15,7 +15,7 @@ var PORT = process.env.PORT|80 ;
 app.use(express.static(__dirname));
 app.use(express.static('client_nguyen_anh'));
 
-app.get('/', function(req, res){
+app.get('*', function(req, res){
   res.sendFile('httpClient.html', {root:path.join(__dirname,'./client_nguyen_anh')});
 });
 
