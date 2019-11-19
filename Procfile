@@ -1,1 +1,1 @@
-web: bundle exec  server -p $PORT
+web: node httpServer.js
