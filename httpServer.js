@@ -1,7 +1,7 @@
 var express =require('express');
 var fs = require('fs');
 var app = express();
-const http = require('https').createServer(app);
+const http = require('http').createServer(app);
 var path = require('path');
 const csurf = require('csurf');
 const cookieParser = require('cookie-parser');
@@ -11,7 +11,7 @@ const csrfMiddleware = csurf({
 // app.use(cookieParser());
 // app.use(csrfMiddleware);
 
-var PORT = 8080 ;
+var PORT = process.env.PORT|3000 ;
 app.use(express.static(__dirname));
 app.use(express.static('client_nguyen_anh'));
 
