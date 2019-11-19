@@ -1,7 +1,6 @@
 {
   "name": "first_app",
   "version": "1.0.0",
-  "description": "",
   "main": "httpServer.js",
   "dependencies": {
     "cookie-parser": "^1.4.4",
@@ -16,7 +15,10 @@
     "start": "node httpServer.js"
   },
   "author": "",
-  "license": "ISC"
- 
-
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "master"
+  },
+  "description": ""
 }
