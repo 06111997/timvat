@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+
+  $("p").click(function(){
+    $(this).hide();
+    $.ajax({
+        url: "/loadJsonData",
+        type: "POST",
+        dataType: "json",
+        data: {
+        },
+        beforeSend: function () {
+        },
+        success: function (res) {
+            alert(res);
+        },
+        failure: function () {
+            alert("!!!");
+        },
+        error: function (xhr, textStatus, exceptionThrown) {
+            alert(JSON.parse(xhr.responseText));
+        }
+    });
+  });
+
+  $('#get-ajax').click(function(){
+    $.ajax({
+        url: "/products",
+        contentType:'application/json',
+        dataType: "json",
+        data: {
+        },
+        beforeSend: function () {
+        },
+        success: function (res) {
+            alert(res);
+        },
+        failure: function () {
+            alert("!!!");
+        },
+        error: function (xhr, textStatus, exceptionThrown) {
+            alert(JSON.parse(xhr.responseText));
+        }
+    });
+  })
+});
+</script>
+</head>
+<body>
+
+<p>If you click on me, I will disappear.</p>
+<p>Click me away!</p>
+<p>Click me too!</p>
+<button id="get-ajax">GET</button>
+<script>
+//setInterval(function(){ window.location.reload(1); }, 5000);
+</script>
+</body>
+</html>
