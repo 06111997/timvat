@@ -1,7 +1,8 @@
 {
   "name": "first_app",
   "version": "1.0.0",
-  "main": "interval.js",
+  "description": "",
+  "main": "httpServer.js",
   "dependencies": {
     "cookie-parser": "^1.4.4",
     "csurf": "^1.10.0",
@@ -14,11 +15,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "master"
-  },
   "author": "",
-  "license": "ISC",
-  "description": ""
+  "license": "ISC"
 }
