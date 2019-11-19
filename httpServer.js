@@ -53,6 +53,6 @@ app.get('*', function(req, res){
   res.status(404).send('404 NOT FOUND');
 });
 
-http.listen(PORT,function(){
+http.listen(PORT,"0.0.0.0",function(){
   console.log("SERVER LISTEN ON "+ PORT);
 })
