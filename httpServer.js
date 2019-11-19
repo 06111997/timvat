@@ -1,6 +1,7 @@
 var express =require('express');
 var fs = require('fs');
 var app = express();
+const http = require('http').createServer(app);
 var path = require('path');
 const csurf = require('csurf');
 const cookieParser = require('cookie-parser');
@@ -10,7 +11,7 @@ const csrfMiddleware = csurf({
 // app.use(cookieParser());
 // app.use(csrfMiddleware);
 
-var PORT = 80||process.env.PORT ;
+var PORT = process.env.PORT|3000 ;
 app.use(express.static(__dirname));
 app.use(express.static('client_nguyen_anh'));
 
@@ -52,6 +53,6 @@ app.get('*', function(req, res){
   res.status(404).send('404 NOT FOUND');
 });
 
-app.listen(PORT,function(){
+http.listen(PORT,function(){
   console.log("SERVER LISTEN ON "+ PORT);
 })
