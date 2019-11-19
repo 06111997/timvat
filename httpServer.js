@@ -10,7 +10,7 @@ const csrfMiddleware = csurf({
 // app.use(cookieParser());
 // app.use(csrfMiddleware);
 
-var PORT = process.env.PORT || 3000;
+var PORT = 80||process.env.PORT ;
 app.use(express.static(__dirname));
 app.use(express.static('client_nguyen_anh'));
 
