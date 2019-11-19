@@ -15,7 +15,7 @@ app.use(express.static(__dirname));
 app.use(express.static('client'));
 
 app.get('/', function(req, res){
-  res.sendFile('httpClient.html', {root:path.join(__dirname,'./client')});
+  res.sendFile('httpClient.html', {root:path.join(__dirname,'./client_nguyen_anh')});
 });
 
 app.post('/reloadMap',function(req,res){
