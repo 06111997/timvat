@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "httpServer.js",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "csurf": "^1.10.0",
     "express": "^4.17.1",

@@ -1,6 +1,8 @@
 var express =require('express');
 var fs = require('fs');
 var app = express();
+var bodyParser = require('body-parser')
+
 const http = require('http').createServer(app);
 var path = require('path');
 const csurf = require('csurf');
@@ -8,15 +10,18 @@ const cookieParser = require('cookie-parser');
 const csrfMiddleware = csurf({
   cookie: true
 });
-// app.use(cookieParser());
-// app.use(csrfMiddleware);
+
+// parse application/json
+app.use(bodyParser.json())
 
 var PORT = process.env.PORT||3000 ;
 app.use(express.static(__dirname));
 app.use(express.static('client_nguyen_anh'));
-
 app.get('*', function(req, res){
   res.sendFile('httpClient.html', {root:path.join(__dirname,'./client_nguyen_anh')});
+});
+app.post('/sendPhone',function(req,res){
+  console.log(req.body);
 });
 
 app.post('/reloadMap',function(req,res){
@@ -37,7 +42,6 @@ app.post('/reloadMap',function(req,res){
 });
 
 app.post('/sendDataToServer',function(req,res){
-  //console.log(req._parsedOriginalUrl.query);
   let uluru = {lat: 21.00136, lng: 105.8484633};
   const rad = Math.floor(Math.random() * 49) + 1;
   uluru.lng = uluru.lng + 0.00002 *  rad;

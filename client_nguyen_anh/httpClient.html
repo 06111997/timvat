@@ -4,28 +4,38 @@
 <head>
   <script src="jquery.min.js"></script>
   <title>Simple Map</title>
+  <link rel="stylesheet" type="text/css" href="Style.css" />
+
   <meta name="viewport" content="initial-scale=1.0">
   <meta charset="utf-8">
   <style>
-    #map {
-      height: 100%;
-      width: 70%;
-      float: right;
-    }
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
+
   </style>
 </head>
 
 <body>
-  <form id="__AjaxAntiForgeryForm" action="#" method="post">
-  <input type="hidden" value="{0}">
-  </form>
-  <button id="get-ajax">GET</button>
+    <div class="page-header">
+        <div class="info_gps">
+            <button id="get-ajax">GET</button>
+            <div ><b>Time: </b> <span class="time"></span></div>
+            <div ><b>Lat: </b> <span class="lat"></span></div>
+            <div ><b>Long: </b> <span class="long"> </span></div>
+        </div>
+        <div class="info_contact">
+          <form>
+            <input type="text" placeholder="Phone number" name="phone_number" class="phone_num">
+            <input type="button" value="Send" class="send_btt">
+            
+          </form>
+          
+        </div>
+    </div>
+<!-- <div>
+    <form id="__AjaxAntiForgeryForm" action="#" method="post">
+        <input type="hidden" value="{0}">
+        </form>
+        
+</div> -->
   <div id="map"></div>
   <script src="./_initIndex.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzZpF69mDaEDxYRW0J2BC1GUCUwbKM2qM&callback=initMap"
