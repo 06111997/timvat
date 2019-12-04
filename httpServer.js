@@ -2,6 +2,7 @@ var express =require('express');
 var fs = require('fs');
 var app = express();
 var bodyParser = require('body-parser')
+var DataApp=require('./data')
 
 const http = require('http').createServer(app);
 var path = require('path');
@@ -10,6 +11,9 @@ const cookieParser = require('cookie-parser');
 const csrfMiddleware = csurf({
   cookie: true
 });
+const database=new DataApp('database')
+database.createTable();
+
 
 // parse application/json
 app.use(bodyParser.json())
@@ -25,32 +29,43 @@ app.post('/sendPhone',function(req,res){
 });
 
 app.post('/reloadMap',function(req,res){
-  const readline = require('readline');
-  let rl = readline.createInterface({
-    input: fs.createReadStream('file.txt')
-  });
-  let line_no = 0;
-  let last_line;
+  // const readline = require('readline');
+  // let rl = readline.createInterface({
+  //   input: fs.createReadStream('file.txt')
+  // });
+  // let line_no = 0;
+  // let last_line;
 
-  rl.on('line', function(line) {
-    line_no++;
-    last_line = line;
-  });
-  rl.on('close', function() {
-    res.status(200).send(last_line);
-  });
+  // rl.on('line', function(line) {
+  //   line_no++;
+  //   last_line = line;
+  // });
+  database.getLast().then(result=>{
+    
+    var arr,send_data;
+     arr=result.message.split(",")
+     send_data={lng:parseFloat(arr[1]),lat:parseFloat(arr[2])};
+  console.log(JSON.stringify(send_data))
+    res.status(200).send(JSON.stringify(send_data));
+  
+}
+  )
+
 });
 
 app.post('/sendDataToServer',function(req,res){
   let uluru = {lat: 21.00136, lng: 105.8484633};
   const rad = Math.floor(Math.random() * 49) + 1;
   uluru.lng = uluru.lng + 0.00002 *  rad;
-  uluru.lat = uluru.lat + 0.00002 * (1 - 1 / rad);
-  fs.appendFile('file.txt','\n' + JSON.stringify(uluru), function (err) {
-    if (err) throw err;
-    console.log('Updated!');
-    res.status(200).send("loaded");
-  });
+  uluru.lat = uluru.lat + 0.00002 * (1 - 1 / rad)
+  
+  
+  database.insertTable(req.body.MessageSim)
+  // fs.appendFile('file.txt','\n' + JSON.stringify(uluru), function (err) {
+  //   if (err) throw err;
+  //   console.log('Updated!');
+  //   res.status(200).send("loaded");
+  // });
 });
 
 app.get('*', function(req, res){

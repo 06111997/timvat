@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "main": "httpServer.js",
   "dependencies": {
+    "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "csurf": "^1.10.0",
     "express": "^4.17.1",
     "formidable": "^1.2.1",
     "net": "^1.0.2",
-    "nodemailer": "^6.3.0"
+    "nodemailer": "^6.3.0",
+    "sqlite3": "^4.1.0"
   },
   "engines": {
     "node": "12.13.1"

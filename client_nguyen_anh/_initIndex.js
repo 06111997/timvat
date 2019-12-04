@@ -37,7 +37,7 @@ function sendPhone(){
             url:'/sendPhone',
             type:'POST',
             data:JSON.stringify({
-                phone:number
+                "phone":number
             }),
             dataType:'json',
             contentType: 'application/json; charset=utf-8',
@@ -55,8 +55,7 @@ function sendDataToServer(){
         url:'/sendDataToServer',
         type:'POST',
         data:JSON.stringify({
-            id: 3,
-            name: "Hi"
+            MessageSim:"CLBS: 0,105.851631,21.000396,550    OK  "
         }),
         contentType: 'application/json',
         success: function(res){
