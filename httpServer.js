@@ -2,6 +2,7 @@ var express =require('express');
 var fs = require('fs');
 var app = express();
 var bodyParser = require('body-parser')
+// gọi module DataApp, './data' link  đường dẫn đến tên file tạo lớp DataApp
 var DataApp=require('./data')
 
 const http = require('http').createServer(app);
@@ -11,6 +12,7 @@ const cookieParser = require('cookie-parser');
 const csrfMiddleware = csurf({
   cookie: true
 });
+//tạo đối tượng database liên kết với database
 const database=new DataApp('database')
 database.createTable();
 
@@ -29,21 +31,17 @@ app.post('/sendPhone',function(req,res){
 });
 
 app.post('/reloadMap',function(req,res){
-  // const readline = require('readline');
-  // let rl = readline.createInterface({
-  //   input: fs.createReadStream('file.txt')
-  // });
-  // let line_no = 0;
-  // let last_line;
-
-  // rl.on('line', function(line) {
-  //   line_no++;
-  //   last_line = line;
-  // });
+//lấy bản ghi cuối cùng lưu ở biến result có format {id:"2", MessageSim:"CLBS: 0,105.852831,21.006396,550    OK"}
   database.getLast().then(result=>{
     
     var arr,send_data;
-     arr=result.message.split(",")
+     arr=result.MessageSim.split(",")
+     /* arr[0]="CLBS: 0"
+         arr[1]="105.852831"
+         arr[2]="21.006396"
+         arr[3]="550    OK"
+     */
+    //tạo chuỗi json gửi client browser
      send_data={lng:parseFloat(arr[1]),lat:parseFloat(arr[2])};
   console.log(JSON.stringify(send_data))
     res.status(200).send(JSON.stringify(send_data));
@@ -52,20 +50,10 @@ app.post('/reloadMap',function(req,res){
   )
 
 });
-
+//nhận từ thiết bị sim
 app.post('/sendDataToServer',function(req,res){
-  let uluru = {lat: 21.00136, lng: 105.8484633};
-  const rad = Math.floor(Math.random() * 49) + 1;
-  uluru.lng = uluru.lng + 0.00002 *  rad;
-  uluru.lat = uluru.lat + 0.00002 * (1 - 1 / rad)
-  
   
   database.insertTable(req.body.MessageSim)
-  // fs.appendFile('file.txt','\n' + JSON.stringify(uluru), function (err) {
-  //   if (err) throw err;
-  //   console.log('Updated!');
-  //   res.status(200).send("loaded");
-  // });
 });
 
 app.get('*', function(req, res){
