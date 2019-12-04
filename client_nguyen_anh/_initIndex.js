@@ -49,13 +49,16 @@ function sendPhone(){
     }
 
 }
+var i=0
 function sendDataToServer(){
-
+     i=i+1;
+     var x=105.851631+i*0.0003;
+     var y=21.000396+i*0.0015;
     $.ajax({
         url:'/sendDataToServer',
         type:'POST',
         data:JSON.stringify({
-            MessageSim:"CLBS: 0,105.851631,21.000396,550    OK  "
+            MessageSim:"CLBS: 0,"+x+","+y+",550    OK  "
         }),
         contentType: 'application/json',
         success: function(res){
