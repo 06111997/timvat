@@ -54,11 +54,12 @@ function sendDataToServer(){
      i=i+1;
      var x=105.851631+i*0.0003;
      var y=21.000396+i*0.0015;
+     var me="CLBS: 0,"+x+","+y+",550    OK  ";
     $.ajax({
         url:'/sendDataToServer',
         type:'POST',
         data:JSON.stringify({
-            MessageSim:"CLBS: 0,"+x+","+y+",550    OK  "
+            MessageSim:me
         }),
         contentType: 'application/json',
         success: function(res){
